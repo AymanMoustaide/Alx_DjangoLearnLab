@@ -1,3 +1,5 @@
+# relationship_app/query_samples.py
+
 from relationship_app.models import Author, Book, Library, Librarian
 
 def query_books_by_author(author_name):
@@ -30,20 +32,23 @@ def retrieve_librarian_for_library(library_name):
     """
     try:
         library = Library.objects.get(name=library_name)
-        librarian = library.librarian  
+        librarian = library.librarian  # Assuming the related_name is 'librarian'
         return librarian
     except Library.DoesNotExist:
         return None
 
 if __name__ == "__main__":
+    # Sample usage
     author_name = "J.K. Rowling"
     library_name = "Central Library"
 
+    # Query books by a specific author
     books = query_books_by_author(author_name)
     print(f"Books by {author_name}:")
     for book in books:
         print(f"- {book.title}")
 
+    # List all books in a specific library
     books_in_library = list_books_in_library(library_name)
     if books_in_library is not None:
         print(f"\nBooks in {library_name}:")
@@ -52,6 +57,7 @@ if __name__ == "__main__":
     else:
         print(f"\nLibrary '{library_name}' does not exist.")
 
+    # Retrieve the librarian for a specific library
     librarian = retrieve_librarian_for_library(library_name)
     if librarian is not None:
         print(f"\nLibrarian of {library_name}: {librarian.name}")
