@@ -1,7 +1,6 @@
 from django.shortcuts import render
+from .models import Book  # Assuming you have a Book model
 
-# Create your views here.
-from .models import Book  
 
 def list_books(request):
     books = Book.objects.all()
@@ -20,6 +19,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 
+# Login view
 def login_view(request):
     return auth_views.LoginView.as_view(template_name='relationship_app/login.html')(request)
 
@@ -93,10 +93,13 @@ def member_view(request):
     return render(request, 'relationship_app/member_view.html')
 
 
+
+
+
 from django.contrib.auth.decorators import permission_required
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Book
-from .form import BookForm
+from .forms import BookForm
 
 @permission_required('relationship_app.can_add_book', raise_exception=True)
 def add_book(request):
