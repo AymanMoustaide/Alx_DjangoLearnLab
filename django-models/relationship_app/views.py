@@ -93,13 +93,10 @@ def member_view(request):
     return render(request, 'relationship_app/member_view.html')
 
 
-
-
-
 from django.contrib.auth.decorators import permission_required
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Book
-from .forms import BookForm
+from .form import BookForm
 
 @permission_required('relationship_app.can_add_book', raise_exception=True)
 def add_book(request):
